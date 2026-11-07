@@ -6,6 +6,7 @@
 - 화면: https://j333333766-hub.github.io/iljeong-kok/ (GitHub Pages, `docs/index.html`)
 - 서버: Google Apps Script 웹 앱 (`gas/Code.js`, 시트에 묶인 스크립트)
 - 시트: 「일정콕 - 업무일정」 (내 드라이브)
+- 캘린더: ‘업무일정(일정콕)’ — 화면 오른쪽 위 📅 단추로 바로 열림. 공유 주소: https://calendar.google.com/calendar/u/0?cid=ZjI2NmU3ODk3OGM2MDEwMzczNTdmZTU4NWMxMGZiY2U4NGY3MDY2NmNjM2YzZWM5NTZlMmU3YzBlMDM5ZWMyNUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t (휴대폰 앱에서 안 보이면 설정에서 이 캘린더를 켤 것)
 
 ## 처음 한 번 설정
 
