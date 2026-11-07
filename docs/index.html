@@ -118,7 +118,7 @@ let CONN = ls.get('kok.conn', null);
 function readHash() {
   const m = location.hash.match(/connect=([\w-]+)/);
   if (!m) return;
-  try { const j = JSON.parse(atob(m[1].replace(/-/g, '+').replace(/_/g, '/'))); if (j.u && j.k) { CONN = { u: j.u, k: j.k }; ls.set('kok.conn', CONN); toast('연결했어요. 이 기기에 저장됐습니다.'); } } catch { toast('연결 링크가 잘못되었습니다.'); }
+  try { const j = JSON.parse(atob(m[1].replace(/-/g, '+').replace(/_/g, '/'))); if (j.u && /\/dev$/.test(j.u)) { toast('이 링크는 시험용(/dev) 주소예요. 편집기에서 linkInfo()를 다시 실행해 새 링크를 열어 주세요.', 6000); } else if (j.u && j.k) { CONN = { u: j.u, k: j.k }; ls.set('kok.conn', CONN); toast('연결했어요. 이 기기에 저장됐습니다.'); } } catch { toast('연결 링크가 잘못되었습니다.'); }
   history.replaceState(null, '', location.pathname);
 }
 readHash();

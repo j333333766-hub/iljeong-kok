@@ -9,6 +9,8 @@ const SHEET = '일정';
 const CAL_NAME = '업무일정(일정콕)';
 const TZ = 'Asia/Seoul';
 const PAGE = 'https://j333333766-hub.github.io/iljeong-kok/';
+// 배포 주소(/exec). 편집기에서 ScriptApp.getService().getUrl()은 시험용 /dev 주소를 돌려줘 화면에서 부를 수 없다.
+const EXEC = 'https://script.google.com/macros/s/AKfycbwbZnqe4rci-aAUZJcsAD7OFgs-4qd5s-orm7wvgJcpOEZOYjOQaHf9jEeqS0CZSJbb/exec';
 const HEAD = ['id', '날짜', '끝날짜', '시작', '끝', '종일', '제목', '분류', '장소', '메모', '상태', '캘린더ID', '등록', '수정'];
 const C = Object.fromEntries(HEAD.map((h, i) => [h, i]));
 const CATS = ['수업', '회의', '마감', '행사', '출장', '기타'];
@@ -43,8 +45,7 @@ function setup() {
 
 /** 배포한 뒤 실행: 화면과 이 스크립트를 잇는 연결 링크를 로그에 적는다(링크에 접속 키가 들어 있으니 남에게 보내지 말 것). */
 function linkInfo() {
-  const url = ScriptApp.getService().getUrl();
-  if (!url) { Logger.log('아직 웹 앱으로 배포되지 않았습니다.'); return; }
+  const url = EXEC;
   const key = PropertiesService.getScriptProperties().getProperty('KEY');
   const code = Utilities.base64EncodeWebSafe(JSON.stringify({ u: url, k: key }));
   Logger.log('연결 링크(한 번만 열면 그 기기에 저장됨):\n%s#connect=%s', PAGE, code);
