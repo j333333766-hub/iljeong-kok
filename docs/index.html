@@ -40,7 +40,7 @@ h2{font-size:17px;margin:0 0 10px;display:flex;align-items:center;gap:6px}
 .btn.pri{background:var(--pri);border-color:var(--pri);color:#fff}.btn.big{width:100%;padding:14px;font-size:17px;margin-top:14px}
 .btn.bad{color:var(--bad);border-color:var(--badb)}.btn:disabled{opacity:.55;cursor:default}
 details.more summary{cursor:pointer;color:var(--sub);font-weight:600;margin-top:12px}
-.brief{white-space:pre-wrap;background:var(--pri2);border-radius:12px;padding:12px 14px;font-size:14.5px;margin:0}
+.brief{font-family:inherit;white-space:pre-wrap;background:var(--pri2);border-radius:12px;padding:12px 14px;font-size:14.5px;margin:0}
 .tabs{display:flex;gap:4px;background:var(--bg);border-radius:12px;padding:4px;margin-bottom:10px}
 .tabs button{flex:1;border:0;background:transparent;border-radius:9px;padding:8px 4px;font-weight:700;color:var(--sub);font-size:14px}
 .tabs button.on{background:var(--card);color:var(--pri);box-shadow:0 1px 3px rgba(0,0,0,.08)}
@@ -115,12 +115,14 @@ function toast(m, ms = 2600) { const t = $('#toast'); t.textContent = m; t.class
 
 // ---------- 연결(웹 앱 주소 + 접속 키는 이 기기에만 저장) ----------
 let CONN = ls.get('kok.conn', null);
-(function readHash() {
+function readHash() {
   const m = location.hash.match(/connect=([\w-]+)/);
   if (!m) return;
   try { const j = JSON.parse(atob(m[1].replace(/-/g, '+').replace(/_/g, '/'))); if (j.u && j.k) { CONN = { u: j.u, k: j.k }; ls.set('kok.conn', CONN); toast('연결했어요. 이 기기에 저장됐습니다.'); } } catch { toast('연결 링크가 잘못되었습니다.'); }
   history.replaceState(null, '', location.pathname);
-})();
+}
+readHash();
+addEventListener('hashchange', () => { if (/connect=/.test(location.hash)) { readHash(); load(); } });
 
 async function api(action, data = {}) {
   if (!CONN) throw new Error('연결되지 않았습니다.');
